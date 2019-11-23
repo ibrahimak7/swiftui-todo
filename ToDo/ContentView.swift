@@ -9,13 +9,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.managedObjectContext) var managedObjectContexxt
+    @EnvironmentObject var settings: UserSettings
     var body: some View {
-        Text("Hello World")
+        Group {
+            if settings.login {
+                HomeView()
+            }else{
+                GetStarted()
+            }
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+
+        ContentView().environmentObject(UserSettings())
     }
+}
+class UserSettings: ObservableObject {
+    @Published var login = DEFAULTS.bool(forKey: "login")
 }
