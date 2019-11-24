@@ -7,10 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE3B47BC238900F300B42BC1 /* ViewTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3B47BB238900F300B42BC1 /* ViewTasks.swift */; };
+		EE3B47BE2389010A00B42BC1 /* CategoriesTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3B47BD2389010A00B42BC1 /* CategoriesTasks.swift */; };
+		EE3B47C02389012100B42BC1 /* AddTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3B47BF2389012100B42BC1 /* AddTask.swift */; };
 		EE45FB082387E9C0003D82A6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE45FB072387E9C0003D82A6 /* Constants.swift */; };
 		EE45FB0B2387F14D003D82A6 /* GetStarted.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE45FB0A2387F14D003D82A6 /* GetStarted.swift */; };
 		EE45FB0E2387F2A0003D82A6 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE45FB0D2387F2A0003D82A6 /* HomeView.swift */; };
 		EE45FB102387F5AB003D82A6 /* Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE45FB0F2387F5AB003D82A6 /* Testing.swift */; };
+		EE49A6E5238A860100C2A9A9 /* TaskViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE49A6E4238A860100C2A9A9 /* TaskViewRow.swift */; };
 		EED168772388D030008C1553 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED168762388D030008C1553 /* ImagePicker.swift */; };
 		EEE92E38237DB62F00D8B7A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE92E37237DB62F00D8B7A0 /* AppDelegate.swift */; };
 		EEE92E3A237DB62F00D8B7A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE92E39237DB62F00D8B7A0 /* SceneDelegate.swift */; };
@@ -24,10 +28,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EE3B47BB238900F300B42BC1 /* ViewTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTasks.swift; sourceTree = "<group>"; };
+		EE3B47BD2389010A00B42BC1 /* CategoriesTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTasks.swift; sourceTree = "<group>"; };
+		EE3B47BF2389012100B42BC1 /* AddTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTask.swift; sourceTree = "<group>"; };
 		EE45FB072387E9C0003D82A6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EE45FB0A2387F14D003D82A6 /* GetStarted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStarted.swift; sourceTree = "<group>"; };
 		EE45FB0D2387F2A0003D82A6 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EE45FB0F2387F5AB003D82A6 /* Testing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testing.swift; sourceTree = "<group>"; };
+		EE49A6E4238A860100C2A9A9 /* TaskViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewRow.swift; sourceTree = "<group>"; };
 		EED168762388D030008C1553 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		EEE92E34237DB62F00D8B7A0 /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEE92E37237DB62F00D8B7A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +75,10 @@
 			children = (
 				EE45FB0D2387F2A0003D82A6 /* HomeView.swift */,
 				EED168762388D030008C1553 /* ImagePicker.swift */,
+				EE3B47BB238900F300B42BC1 /* ViewTasks.swift */,
+				EE49A6E4238A860100C2A9A9 /* TaskViewRow.swift */,
+				EE3B47BD2389010A00B42BC1 /* CategoriesTasks.swift */,
+				EE3B47BF2389012100B42BC1 /* AddTask.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -197,6 +209,7 @@
 				EE45FB0E2387F2A0003D82A6 /* HomeView.swift in Sources */,
 				EEE92E38237DB62F00D8B7A0 /* AppDelegate.swift in Sources */,
 				EE45FB102387F5AB003D82A6 /* Testing.swift in Sources */,
+				EE3B47BC238900F300B42BC1 /* ViewTasks.swift in Sources */,
 				EEE92E3D237DB62F00D8B7A0 /* ToDo.xcdatamodeld in Sources */,
 				EE45FB0B2387F14D003D82A6 /* GetStarted.swift in Sources */,
 				EEE92E50237DB6D100D8B7A0 /* Task.swift in Sources */,
@@ -205,6 +218,9 @@
 				EE45FB082387E9C0003D82A6 /* Constants.swift in Sources */,
 				EEE92E3A237DB62F00D8B7A0 /* SceneDelegate.swift in Sources */,
 				EEE92E52237DBE2B00D8B7A0 /* CreateProfile.swift in Sources */,
+				EE49A6E5238A860100C2A9A9 /* TaskViewRow.swift in Sources */,
+				EE3B47C02389012100B42BC1 /* AddTask.swift in Sources */,
+				EE3B47BE2389010A00B42BC1 /* CategoriesTasks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

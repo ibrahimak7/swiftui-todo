@@ -28,7 +28,8 @@ struct GetStarted: View {
                 .sheet(isPresented: $createProfile) {
                     CreateProfile(createProfile: self.$createProfile, didAddUser: {
                         (text) in
-                        print(text)
+                        self.settings.login = true
+                        DEFAULTS.set(true, forKey: "login")
                     })
                 }
                 .background(Color.green).cornerRadius(20).foregroundColor(.white)

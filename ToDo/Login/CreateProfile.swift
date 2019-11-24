@@ -59,11 +59,13 @@ struct CreateProfile: View {
             if self.isValid() {
                 Group {
                     Button(action: {
-                        print(self.firstName)
-                        print(self.lastName)
+                        DEFAULTS.setValue(self.firstName, forKey: "firstName")
+                        DEFAULTS.setValue(self.lastName, forKey: "lastName")
+                        let data = self.imageToGet?.pngData()
+                        guard let imageData = data else { return }
+                        DEFAULTS.setValue(imageData, forKey: "displayImage")
                         self.createProfile = false
                         self.didAddUser?("added.")
-                        
                     }) {
                         Text("Save Profile")
                         .padding(10)
