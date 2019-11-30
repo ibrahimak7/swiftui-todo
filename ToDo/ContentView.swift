@@ -9,7 +9,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) var managedObjectContexxt
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(fetchRequest: TasksList.getTaskList()) var toDoItems: FetchedResults<TasksList>
     @EnvironmentObject var settings: UserSettings
     var body: some View {
         Group {
@@ -18,6 +19,24 @@ struct ContentView: View {
             }else{
                 GetStarted()
             }
+        }
+    }
+    fileprivate func saveNow() {
+        let todoItem = TasksList(context: self.managedObjectContext)
+        todoItem.task = "Meeting with client"
+        todoItem.dueDate = Date()
+        todoItem.createdAt = Date()
+        todoItem.category = "Meeting"
+        do {
+            try self.managedObjectContext.save()
+            print("worked.")
+        }catch{
+            print(error.localizedDescription)
+        }
+    }
+    fileprivate func getAllData() {
+        for item in toDoItems {
+            print(item.category)
         }
     }
 }

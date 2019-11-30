@@ -7,12 +7,15 @@
 //
 
 import SwiftUI
-
+import CoreData
 struct AddTask: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
     @Binding var addTaskBoolean: Bool
+    @State var showError = false
     @State var taskText = ""
-    @State private var birthDate = Date()
-    
+    @State private var dueDate = Date()
+    @State var taskCategories = taskTypes
+    @State var errorMessage = ""
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
@@ -31,12 +34,19 @@ struct AddTask: View {
                 Divider()
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
-                        ForEach(0..<10) { i in
-                          Image(systemName: "circle")
-                          .font(.system(size: 12))
-                          .foregroundColor(Color.gray)
-                          Text("Category \(i)")
+                            ForEach(taskCategories) { category in
+                                Image(systemName: category.isSelected ? "checkmark.circle.fill" : "circle.fill")
+                                    .foregroundColor(Color(getColor(name: category.type)))
+                              .font(.system(size: 17))
+                                Text(category.type)
+                                .onTapGesture {
+                                    self.clearAll()
+                                    let index = self.taskCategories.firstIndex(where: { $0.id == category.id })
+                                    self.taskCategories[index!].isSelected.toggle()
+                                }
+                            
                         }
+                        
                         
                     }
                 }.frame(height: 60)
@@ -44,13 +54,36 @@ struct AddTask: View {
             }.padding()
             VStack(alignment: .center) {
                 Text("Task Date Time").font(.headline)
-                DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: [.hourAndMinute, .date]) {
+                DatePicker(selection: $dueDate, in: ...Date(), displayedComponents: [.hourAndMinute, .date]) {
                     Text("")
                 }
             }
             .padding(10)
             Button(action: {
-                // TODO: ...
+                if !self.isValid() {
+                    self.errorMessage = "Task is required."
+                    self.showError = true
+                    return
+                }
+                let selectedCategory = self.taskCategories.first(where: { $0.isSelected == true })
+                guard let category = selectedCategory else {
+                    self.errorMessage = "Category is required."
+                    self.showError = true
+                    return
+                }
+                let todoItem = TasksList(context: self.managedObjectContext)
+                todoItem.task = self.taskText
+                todoItem.dueDate = self.dueDate
+                todoItem.createdAt = Date()
+                todoItem.category = category.type
+                print(self.managedObjectContext)
+                do {
+                    try self.managedObjectContext.save()
+                    self.addTaskBoolean = false
+                }catch{
+                    print(error.localizedDescription)
+                }
+                
             }) {
                 HStack {
                     Spacer()
@@ -66,11 +99,42 @@ struct AddTask: View {
             .padding()
             Spacer()
         }
+        .alert(isPresented: $showError) { () -> Alert in
+            Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .cancel())
+        }
+    }
+    fileprivate func clearAll() {
+        for i in 0..<self.taskCategories.count {
+            self.taskCategories[i].isSelected = false
+        }
+    }
+    fileprivate func isValid()->Bool {
+        if taskText == "" {
+            return false
+        }
+        return true
     }
 }
 
 struct AddTask_Previews: PreviewProvider {
     static var previews: some View {
         AddTask(addTaskBoolean: .constant(false))
+    }
+}
+var taskTypes = [Category(type: "Personal"), Category(type: "Work"), Category(type: "Meeting"), Category(type: "Study"), Category(type: "Shopping"), Category(type: "Party")]
+func getColor(name: String)->UIColor{
+    switch name {
+    case "Personal":
+        return UIColor.systemYellow
+    case "Work":
+        return UIColor.systemGreen
+    case "Meeting":
+        return UIColor.systemPurple
+    case "Study":
+        return UIColor.systemBlue
+    case "Shopping":
+        return UIColor.systemOrange
+    default:
+        return UIColor.systemBackground
     }
 }

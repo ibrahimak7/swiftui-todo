@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct ViewTasks: View {
+    @FetchRequest(fetchRequest: TasksList.getTaskList()) var items:  FetchedResults<TasksList>
     init() {
         UITableView.appearance().separatorStyle = .none
         UITableView.appearance().tableFooterView = UIView()
@@ -22,22 +23,12 @@ struct ViewTasks: View {
                 TODO_BG_COLOR
                     .edgesIgnoringSafeArea(.all)
                 VStack {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("Hello Linda")
-                                .font(.headline)
-                            Text("You have 8 tasks today.")
-                        }
-                        Spacer()
-                        Image(uiImage: self.getImage())
-                            .resizable()
-                            .frame(width: 60, height: 60, alignment: .center)
-                            .scaledToFill()
-                            .cornerRadius(30)
-                    }
+                    IntroView()
                     .padding()
                     List {
-                        TaskViewRow()
+                        ForEach(items) { item in
+                            TaskViewRow(task: item)
+                        }
                     }
                 }
                 

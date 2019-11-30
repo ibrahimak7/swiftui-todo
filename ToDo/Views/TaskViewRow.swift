@@ -9,21 +9,22 @@
 import SwiftUI
 
 struct TaskViewRow: View {
+    var task: TasksList!
     var body: some View {
         VStack {
             HStack {
                 VStack {
                     Rectangle()
-                    .fill(Color.yellow)
+                        .fill(Color(getColor(name: task.category ?? "")))
                     .frame(width: 10, height: 80)
                 }
                 Image(systemName: "circle")
                     .font(.system(size: 20))
                     .foregroundColor(Color.gray)
-                Text("12:34 AM")
+                Text(task.dueDate?.toNormalTime() ?? "00:00 AM")
                     .font(.subheadline)
                     .foregroundColor(Color.gray)
-                Text("Send Notes To Teacher")
+                Text(task.task ?? "No Task")
                 .font(.headline)
                 Spacer()
                 Image(systemName: "bell.fill")
@@ -39,7 +40,7 @@ struct TaskViewRow: View {
 //                    .stroke(Color.white, lineWidth: 1)
 //            )
             .cornerRadius(10)
-                .shadow(color: Color(red: 240/255, green: 240/255, blue: 240/255), radius: 5, x: 0, y: 1)
+            .shadow(color: Color(red: 240/255, green: 240/255, blue: 240/255), radius: 5, x: 0, y: 1)
         }
 //    .padding(10)
     }

@@ -11,6 +11,7 @@ import SwiftUI
 struct HomeView: View {
     let name = DEFAULTS.string(forKey: "firstName") ?? "No Namew"
     @State var showActionSheet: Bool = false
+    @Environment(\.managedObjectContext) var managedObjectContext
     init() {
         UITabBar.appearance().barTintColor = UIColor.white
     }
@@ -42,7 +43,7 @@ struct HomeView: View {
 
         }
         .sheet(isPresented: $showActionSheet) {
-            AddTask(addTaskBoolean: self.$showActionSheet)
+            AddTask(addTaskBoolean: self.$showActionSheet).environment(\.managedObjectContext, self.managedObjectContext)
         }
     }
 }
