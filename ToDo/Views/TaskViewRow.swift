@@ -15,8 +15,8 @@ struct TaskViewRow: View {
             HStack {
                 VStack {
                     Rectangle()
-                        .fill(Color(getColor(name: task.category ?? "")))
-                    .frame(width: 10, height: 80)
+                        .fill(getColor(name: task.category ?? ""))
+                    .frame(width: 6, height: 80)
                 }
                 Image(systemName: "circle")
                     .font(.system(size: 20))

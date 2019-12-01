@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct CategoriesTasks: View {
+    @FetchRequest(fetchRequest: TasksList.getTaskList()) var items:  FetchedResults<TasksList>
     var body: some View {
         ZStack {
             TODO_BG_COLOR
@@ -20,8 +21,8 @@ struct CategoriesTasks: View {
                 List {
                     ForEach(0..<categoriesForGrid.count) { row in
                         HStack {
-                            ForEach(0..<categoriesForGrid[row].count) { item in
-                                CategoryView()
+                            ForEach(categoriesForGrid[row]) { item in
+                                CategoryView(category: item, totalTasks: self.getTotalTasks(category: item.type))
                             }
                         }
                     }
@@ -29,6 +30,10 @@ struct CategoriesTasks: View {
                 Spacer()
             }
         }
+    }
+    fileprivate func getTotalTasks(category: String)->Int {
+        let total = self.items.filter { $0.category == category }.count
+        return total
     }
 }
 

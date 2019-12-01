@@ -36,7 +36,7 @@ struct AddTask: View {
                     HStack {
                             ForEach(taskCategories) { category in
                                 Image(systemName: category.isSelected ? "checkmark.circle.fill" : "circle.fill")
-                                    .foregroundColor(Color(getColor(name: category.type)))
+                                    .foregroundColor(getColor(name: category.type))
                               .font(.system(size: 17))
                                 Text(category.type)
                                 .onTapGesture {
@@ -54,7 +54,7 @@ struct AddTask: View {
             }.padding()
             VStack(alignment: .center) {
                 Text("Task Date Time").font(.headline)
-                DatePicker(selection: $dueDate, in: ...Date(), displayedComponents: [.hourAndMinute, .date]) {
+                DatePicker(selection: $dueDate, in: Date()..., displayedComponents: [.hourAndMinute, .date]) {
                     Text("")
                 }
             }
@@ -90,7 +90,7 @@ struct AddTask: View {
                     Text("Save Task")
                         .font(.headline)
                         .foregroundColor(Color.white)
-                    .padding(10)
+                    .padding(14)
                     Spacer()
                 }
             }
@@ -122,19 +122,19 @@ struct AddTask_Previews: PreviewProvider {
     }
 }
 var taskTypes = [Category(type: "Personal"), Category(type: "Work"), Category(type: "Meeting"), Category(type: "Study"), Category(type: "Shopping"), Category(type: "Party")]
-func getColor(name: String)->UIColor{
+func getColor(name: String)->Color{
     switch name {
     case "Personal":
-        return UIColor.systemYellow
+        return Color(red: 255/255, green: 213/255, blue: 6/255)
     case "Work":
-        return UIColor.systemGreen
+        return Color(red: 30/255, green: 209/255, blue: 2/255)
     case "Meeting":
-        return UIColor.systemPurple
+        return Color(red: 209/255, green: 2/255, blue: 99/255)
     case "Study":
-        return UIColor.systemBlue
+        return Color(red: 191/255, green: 0/255, blue: 128/255)
     case "Shopping":
-        return UIColor.systemOrange
+        return Color(red: 236/255, green: 108/255, blue: 11/255)
     default:
-        return UIColor.systemBackground
+        return Color(red: 9/255, green: 172/255, blue: 206/255)
     }
 }
