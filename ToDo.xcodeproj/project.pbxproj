@@ -19,6 +19,7 @@
 		EE45FB102387F5AB003D82A6 /* Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE45FB0F2387F5AB003D82A6 /* Testing.swift */; };
 		EE49A6E5238A860100C2A9A9 /* TaskViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE49A6E4238A860100C2A9A9 /* TaskViewRow.swift */; };
 		EE9328C123926739004872CD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9328C023926739004872CD /* Extensions.swift */; };
+		EEC62A8623938ADC00FC0366 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC62A8523938ADC00FC0366 /* NotificationManager.swift */; };
 		EED168772388D030008C1553 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED168762388D030008C1553 /* ImagePicker.swift */; };
 		EEE92E38237DB62F00D8B7A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE92E37237DB62F00D8B7A0 /* AppDelegate.swift */; };
 		EEE92E3A237DB62F00D8B7A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE92E39237DB62F00D8B7A0 /* SceneDelegate.swift */; };
@@ -43,6 +44,7 @@
 		EE45FB0F2387F5AB003D82A6 /* Testing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testing.swift; sourceTree = "<group>"; };
 		EE49A6E4238A860100C2A9A9 /* TaskViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewRow.swift; sourceTree = "<group>"; };
 		EE9328C023926739004872CD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		EEC62A8523938ADC00FC0366 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		EED168762388D030008C1553 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		EEE92E34237DB62F00D8B7A0 /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEE92E37237DB62F00D8B7A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +93,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		EEC62A8423938ACD00FC0366 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				EEC62A8523938ADC00FC0366 /* NotificationManager.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
 		EEE92E2B237DB62F00D8B7A0 = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +120,7 @@
 		EEE92E36237DB62F00D8B7A0 /* ToDo */ = {
 			isa = PBXGroup;
 			children = (
+				EEC62A8423938ACD00FC0366 /* Notification */,
 				EE45FB0C2387F288003D82A6 /* Views */,
 				EE45FB092387F13E003D82A6 /* Login */,
 				EEE92E4E237DB6C100D8B7A0 /* Models */,
@@ -230,6 +241,7 @@
 				EE45FB082387E9C0003D82A6 /* Constants.swift in Sources */,
 				EEE92E3A237DB62F00D8B7A0 /* SceneDelegate.swift in Sources */,
 				EEE92E52237DBE2B00D8B7A0 /* CreateProfile.swift in Sources */,
+				EEC62A8623938ADC00FC0366 /* NotificationManager.swift in Sources */,
 				EE49A6E5238A860100C2A9A9 /* TaskViewRow.swift in Sources */,
 				EE3B47C02389012100B42BC1 /* AddTask.swift in Sources */,
 				EE3B47BE2389010A00B42BC1 /* CategoriesTasks.swift in Sources */,

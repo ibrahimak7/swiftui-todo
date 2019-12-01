@@ -28,11 +28,33 @@ struct ViewTasks: View {
                     List {
                         ForEach(items) { item in
                             TaskViewRow(task: item)
+                            .contextMenu {
+                                Button(action: {
+                                    // change country setting
+                                }) {
+                                    Text("Finish")
+                                    Image(systemName: "checkmark.circle")
+                                    .foregroundColor(getColor(name: item.category ?? "Meeting"))
+                                }
+                                Button(action: {
+                                    // change country setting
+                                }) {
+                                    Text("Delete")
+                                    Image(systemName: "trash.circle")
+                                    .foregroundColor(Color.red)
+                                }
+
+                            }
+                            
                         }
+                        
                     }
                 }
                 
         }
+    }
+    func showa() {
+        
     }
     fileprivate func getImage()->UIImage {
         let imageData = DEFAULTS.data(forKey: "displayImage")

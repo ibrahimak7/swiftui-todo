@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct TaskViewRow: View {
+    @Environment(\.managedObjectContext) var manageObjectContext
+    @FetchRequest(fetchRequest: TasksList.getTaskList()) var items:  FetchedResults<TasksList>
     var task: TasksList!
     var body: some View {
         VStack {
@@ -27,18 +29,23 @@ struct TaskViewRow: View {
                 Text(task.task ?? "No Task")
                 .font(.headline)
                 Spacer()
-                Image(systemName: "bell.fill")
-                    .foregroundColor(Color.gray)
+                Image(systemName: task.notify ? "bell.circle.fill" : "bell.slash.fill")
+                    .foregroundColor(task.notify ? Color.yellow : Color.gray)
                     .padding(.trailing, 10)
-                
+                    .onTapGesture {
+                        let index = self.items.firstIndex{ $0.createdAt == self.task.createdAt }
+                        guard let row = index else { return }
+                        self.items[row].notify.toggle()
+                        do {
+                            try self.manageObjectContext.save()
+                        }catch{
+                            print(error)
+                        }
+                }
             }
         
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .some(80), alignment: .topLeading)
             .background(Color.white)
-//            .overlay(
-//                RoundedRectangle(cornerRadius: 10)
-//                    .stroke(Color.white, lineWidth: 1)
-//            )
             .cornerRadius(10)
             .shadow(color: Color(red: 240/255, green: 240/255, blue: 240/255), radius: 5, x: 0, y: 1)
         }
