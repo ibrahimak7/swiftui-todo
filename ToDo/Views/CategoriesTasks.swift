@@ -10,26 +10,43 @@ import SwiftUI
 
 struct CategoriesTasks: View {
     @FetchRequest(fetchRequest: TasksList.getTaskList()) var items:  FetchedResults<TasksList>
+    @State var showCategoryTask = false
+    @State var selectedCategory = ""
+    init() {
+        UINavigationBar.appearance().backgroundColor = UIColor(red: 249/255, green: 252/255, blue: 255/255, alpha: 1)
+    }
     var body: some View {
-        ZStack {
-            TODO_BG_COLOR
-            VStack(alignment: .leading) {
-                IntroView()
-                .padding()
-                Text("Projects")
-                    .padding(.leading, 20)
-                List {
-                    ForEach(0..<categoriesForGrid.count) { row in
-                        HStack {
-                            ForEach(categoriesForGrid[row]) { item in
-                                CategoryView(category: item, totalTasks: self.getTotalTasks(category: item.type))
+        NavigationView {
+            ZStack {
+                TODO_BG_COLOR
+                VStack(alignment: .leading) {
+//                    IntroView()
+//                    .padding()
+                    List {
+                        ForEach(0..<categoriesForGrid.count) { row in
+                            HStack {
+                                ForEach(categoriesForGrid[row]) { item in
+                                    CategoryView(category: item, totalTasks: self.getTotalTasks(category: item.type))
+                                        .onTapGesture {
+                                        self.showCategoryTask = true
+                                        self.selectedCategory = item.type
+                                    }
+                                }
                             }
                         }
                     }
+                    NavigationLink(destination: CategoryTasks(category: selectedCategory), isActive: $showCategoryTask) {
+                               Text("")
+                           }
+                    Spacer()
                 }
-                Spacer()
             }
+        .background(TODO_BG_COLOR)
+        .navigationBarTitle(Text("All Reminders"))
         }
+    }
+    fileprivate func tapped(category: String) {
+        
     }
     fileprivate func getTotalTasks(category: String)->Int {
         let total = self.items.filter { $0.category == category }.count

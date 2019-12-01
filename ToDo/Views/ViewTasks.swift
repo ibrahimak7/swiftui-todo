@@ -9,13 +9,16 @@
 import SwiftUI
 
 struct ViewTasks: View {
+    var searchCategoryTasks: String
     @FetchRequest(fetchRequest: TasksList.getTaskList()) var items:  FetchedResults<TasksList>
-    init() {
+    init(category: String) {
         UITableView.appearance().separatorStyle = .none
         UITableView.appearance().tableFooterView = UIView()
         
         UITableView.appearance().backgroundColor = UIColor(red: 249/255, green: 252/255, blue: 255/255, alpha: 1)
         UITableViewCell.appearance().backgroundColor = UIColor(red: 249/255, green: 252/255, blue: 255/255, alpha: 1)
+        
+        self.searchCategoryTasks = category
     }
     var body: some View {
         ZStack
@@ -26,7 +29,7 @@ struct ViewTasks: View {
                     IntroView()
                     .padding()
                     List {
-                        ForEach(items) { item in
+                        ForEach(getItems()) { item in
                             TaskViewRow(task: item)
                             .contextMenu {
                                 Button(action: {
@@ -56,6 +59,12 @@ struct ViewTasks: View {
     func showa() {
         
     }
+    fileprivate func getItems()->[TasksList] {
+        if searchCategoryTasks != "all" {
+            return self.items.filter { $0.category == searchCategoryTasks }
+        }
+        return self.items.filter { $0.category != ""} // it will return every task in the core data.
+    }
     fileprivate func getImage()->UIImage {
         let imageData = DEFAULTS.data(forKey: "displayImage")
         if let imageData = imageData {
@@ -70,6 +79,6 @@ struct ViewTasks: View {
 
 struct ViewTasks_Previews: PreviewProvider {
     static var previews: some View {
-        ViewTasks()
+        ViewTasks(category: "all")
     }
 }

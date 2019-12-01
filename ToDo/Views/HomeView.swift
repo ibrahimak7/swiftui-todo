@@ -20,7 +20,7 @@ struct HomeView: View {
             GeometryReader { geometry in
                 TabView {
 
-                            ViewTasks()
+                    ViewTasks(category: "all")
                                 .tabItem {
                                     Image(systemName: "list.bullet.below.rectangle")
                             }

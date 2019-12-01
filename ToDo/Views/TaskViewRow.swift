@@ -18,7 +18,7 @@ struct TaskViewRow: View {
                 VStack {
                     Rectangle()
                         .fill(getColor(name: task.category ?? ""))
-                    .frame(width: 6, height: 80)
+                        .frame(width: 6, height: 80)
                 }
                 Image(systemName: "circle")
                     .font(.system(size: 20))
@@ -27,7 +27,7 @@ struct TaskViewRow: View {
                     .font(.subheadline)
                     .foregroundColor(Color.gray)
                 Text(task.task ?? "No Task")
-                .font(.headline)
+                    .font(.headline)
                 Spacer()
                 Image(systemName: task.notify ? "bell.circle.fill" : "bell.slash.fill")
                     .foregroundColor(task.notify ? Color.yellow : Color.gray)
@@ -43,13 +43,13 @@ struct TaskViewRow: View {
                         }
                 }
             }
-        
+            .padding(0)
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .some(80), alignment: .topLeading)
             .background(Color.white)
             .cornerRadius(10)
             .shadow(color: Color(red: 240/255, green: 240/255, blue: 240/255), radius: 5, x: 0, y: 1)
         }
-//    .padding(10)
+        //    .padding(10)
     }
 }
 
