@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ViewTasks: View {
     var searchCategoryTasks: String
+    @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: TasksList.getTaskList()) var items:  FetchedResults<TasksList>
     init(category: String) {
         UITableView.appearance().separatorStyle = .none
@@ -32,15 +33,32 @@ struct ViewTasks: View {
                         ForEach(getItems()) { item in
                             TaskViewRow(task: item)
                             .contextMenu {
-                                Button(action: {
-                                    // change country setting
-                                }) {
-                                    Text("Finish")
-                                    Image(systemName: "checkmark.circle")
-                                    .foregroundColor(getColor(name: item.category ?? "Meeting"))
+                                if !item.completed {
+                                    Button(action: {
+                                       let index = self.items.firstIndex { $0.createdAt == item.createdAt }
+                                        guard let indexValue = index else { return }
+                                        self.items[indexValue].completed = true
+                                        
+                                        do {
+                                            try self.managedObjectContext.save()
+                                        }catch{
+                                            print(error.localizedDescription)
+                                        }
+                                    }) {
+                                        Text("Finish")
+                                        Image(systemName: "checkmark.circle")
+                                        .foregroundColor(getColor(name: item.category ?? "Meeting"))
+                                    }
                                 }
                                 Button(action: {
-                                    // change country setting
+                                    let task = self.items.first { $0.createdAt == item.createdAt }
+                                    guard let taskToDelete = task else { return }
+                                    self.managedObjectContext.delete(taskToDelete)
+                                    do {
+                                        try self.managedObjectContext.save()
+                                    }catch{
+                                        print(error.localizedDescription)
+                                    }
                                 }) {
                                     Text("Delete")
                                     Image(systemName: "trash.circle")

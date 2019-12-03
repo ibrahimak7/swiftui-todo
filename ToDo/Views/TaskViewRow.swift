@@ -26,13 +26,21 @@ struct TaskViewRow: View {
                 Text(task.dueDate?.toNormalTime() ?? "00:00 AM")
                     .font(.subheadline)
                     .foregroundColor(Color.gray)
-                Text(task.task ?? "No Task")
+                
+                if task.completed {
+                    Text(task.task ?? "No Task")
                     .font(.headline)
+                    .strikethrough()
+                }else{
+                    Text(task.task ?? "No Task")
+                    .font(.headline)
+                }
                 Spacer()
-                Image(systemName: task.notify ? "bell.circle.fill" : "bell.slash.fill")
+                Image(systemName: "bell.circle.fill")
                     .foregroundColor(task.notify ? Color.yellow : Color.gray)
                     .padding(.trailing, 10)
                     .onTapGesture {
+//                        LocalNotificationManager().schedualNotificaiton(date: self.task.dueDate ?? Date(), task: self.task.task ?? "", category: self.task.category ?? "")
                         let index = self.items.firstIndex{ $0.createdAt == self.task.createdAt }
                         guard let row = index else { return }
                         self.items[row].notify.toggle()
@@ -43,7 +51,6 @@ struct TaskViewRow: View {
                         }
                 }
             }
-            .padding(0)
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .some(80), alignment: .topLeading)
             .background(Color.white)
             .cornerRadius(10)
